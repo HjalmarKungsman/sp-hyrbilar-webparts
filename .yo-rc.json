@@ -1,0 +1,8 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "libraryName": "hyrbilar",
+    "framework": "none",
+    "version": "1.0.2",
+    "libraryId": "5c8b3edb-e347-47e2-9251-1d4ed2847358"
+  }
+}

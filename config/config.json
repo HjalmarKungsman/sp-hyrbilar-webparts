@@ -1,0 +1,13 @@
+{
+  "entries": [
+    {
+      "entry": "./lib/webparts/hyrbilar/HyrbilarWebPart.js",
+      "manifest": "./src/webparts/hyrbilar/HyrbilarWebPart.manifest.json",
+      "outputPath": "./dist/hyrbilar.bundle.js"
+    }
+  ],
+  "externals": {},
+  "localizedResources": {
+    "hyrbilarStrings": "webparts/hyrbilar/loc/{locale}.js"
+  }
+}

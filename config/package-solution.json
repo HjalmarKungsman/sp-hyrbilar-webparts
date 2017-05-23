@@ -1,0 +1,10 @@
+{
+  "solution": {
+    "name": "hyrbilar-client-side-solution",
+    "id": "5c8b3edb-e347-47e2-9251-1d4ed2847358",
+    "version": "2.0.0.0"
+  },
+  "paths": {
+    "zippedPackage": "solution/hyrbilar.sppkg"
+  }
+}

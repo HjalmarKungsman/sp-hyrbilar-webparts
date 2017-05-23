@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../node_modules/@microsoft/sp-module-interfaces/lib/manifestSchemas/jsonSchemas/clientSideComponentManifestSchema.json",
+
+  "id": "30b83997-41d4-45d6-aebe-845c561d0bdb",
+  "alias": "HyrbilarWebPart",
+  "componentType": "WebPart",
+  "version": "0.0.1",
+  "manifestVersion": 2,
+
+  "preconfiguredEntries": [{
+    "groupId": "30b83997-41d4-45d6-aebe-845c561d0bdb",
+    "group": { "default": "Under Development" },
+    "title": { "default": "Hyrbilar" },
+    "description": { "default": "Hyrbilar description" },
+    "officeFabricIconFontName": "Page",
+    "properties": {
+      "description": "Hyrbilar"
+    }
+  }]
+}
