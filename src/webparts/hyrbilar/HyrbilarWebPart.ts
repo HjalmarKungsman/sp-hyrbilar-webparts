@@ -52,6 +52,12 @@ export default class HyrbilarWebPart extends BaseClientSideWebPart<IHyrbilarWebP
                   <button class="${styles.button} getViews-Button">
                     <span class="${styles.label}">Get views</span>
                   </button>
+                  <button class="${styles.button} getView-Button">
+                    <span class="${styles.label}">Get view</span>
+                  </button>
+                  <button class="${styles.button} getViewField-Button">
+                    <span class="${styles.label}">Get view field</span>
+                  </button>
                 </div>
                 <div>
                   <button class="${styles.button} createItem-Button">
@@ -97,6 +103,8 @@ export default class HyrbilarWebPart extends BaseClientSideWebPart<IHyrbilarWebP
     this.domElement.querySelector('button.createViewField2-Button').addEventListener('click', () => { webPart.createViewField('Title2'); });
     this.domElement.querySelector('button.createViewField3-Button').addEventListener('click', () => { webPart.createViewField('Pris'); });
     this.domElement.querySelector('button.getViews-Button').addEventListener('click', () => { webPart.getViews(); });
+    this.domElement.querySelector('button.getView-Button').addEventListener('click', () => { webPart.getView(); });
+    this.domElement.querySelector('button.getViewField-Button').addEventListener('click', () => { webPart.getViewField(); });
     this.domElement.querySelector('button.createItem-Button').addEventListener('click', () => { webPart.createItem(); });
     this.domElement.querySelector('button.getListItems-Button').addEventListener('click', () => { webPart.getListItems(); });
     this.domElement.querySelector('button.createListAndFields-Button').addEventListener('click', () => { webPart.createListAndFields(); });
@@ -299,6 +307,70 @@ export default class HyrbilarWebPart extends BaseClientSideWebPart<IHyrbilarWebP
         });
       });
   }
+  
+  private getView(): void {
+    this.updateStatus('Getting list views...');
+    this.context.spHttpClient.get(`${this.context.pageContext.web.absoluteUrl}/_api/web/lists('${this.listGuid}')/views('${this.viewGuid}')`,
+      SPHttpClient.configurations.v1,
+      {
+        headers: {
+          'Accept': 'application/json;odata=nometadata',
+          'Content-type': 'application/json;odata=verbose',
+          'odata-version': ''
+        }
+      })
+      .then((response: SPHttpClientResponse) => {
+        console.log(`Status code & text: ${response.status}, ${response.statusText}`);
+        console.log("response: ", response);
+
+        this.updateStatus('List views recived: ');
+        response.json().then((responseJSON: JSON) => {
+          console.log("responseJSON: ", responseJSON);
+
+          // var items = responseJSON['value'];
+          // const itemsHtml: string[] = [];
+          
+          // for (let i: number = 0; i < items.length; i++) {
+          //   itemsHtml.push(`<li>${items[i].Title}</li>`);
+          // }
+
+          // this.domElement.querySelector('.items').innerHTML = itemsHtml.join('');
+        });
+      });
+  }
+
+    private getViewField(): void {
+    this.updateStatus('Getting list views...');
+    this.context.spHttpClient.get(`${this.context.pageContext.web.absoluteUrl}/_api/web/lists('${this.listGuid}')/views('${this.viewGuid}')/ViewFields`,
+      SPHttpClient.configurations.v1,
+      {
+        headers: {
+          'Accept': 'application/json;odata=nometadata',
+          'Content-type': 'application/json;odata=verbose',
+          'odata-version': ''
+        }
+      })
+      .then((response: SPHttpClientResponse) => {
+        console.log(`Status code & text: ${response.status}, ${response.statusText}`);
+        console.log("response: ", response);
+
+        this.updateStatus('List views recived: ');
+        response.json().then((responseJSON: JSON) => {
+          console.log("responseJSON: ", responseJSON);
+          console.log("responseJSON['Items']: ", responseJSON['Items']);
+
+          var items = responseJSON['Items'];
+          const itemsHtml: string[] = [];
+          
+          for (let i: number = 0; i < items.length; i++) {
+            itemsHtml.push(`<li>${items[i]}</li>`);
+          }
+
+          this.domElement.querySelector('.items').innerHTML = itemsHtml.join('');
+        });
+      });
+  }
+
 
   private getListItemEntityTypeName(): Promise<string> {
     return new Promise<string>((resolve: (listItemEntityTypeName: string) => void, reject: (error: any) => void): void => {
@@ -336,7 +408,7 @@ export default class HyrbilarWebPart extends BaseClientSideWebPart<IHyrbilarWebP
       this.createField2(listGuid,'Title2', 2, true, 'Title2')
       .then((response: string) => {
         this.createField2(listGuid,'Pris', 9, true, 'Pris');
-      })
+      });
     });
   }
 
@@ -383,7 +455,7 @@ export default class HyrbilarWebPart extends BaseClientSideWebPart<IHyrbilarWebP
           reject(error);
         });
     });
-  }
+  };
 
 
   
