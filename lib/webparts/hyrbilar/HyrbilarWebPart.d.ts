@@ -15,6 +15,8 @@ export default class HyrbilarWebPart extends BaseClientSideWebPart<IHyrbilarWebP
     private createItem();
     private getListItems();
     private getViews();
+    private getView();
+    private getViewField();
     private getListItemEntityTypeName();
     private createListAndFields();
     private createList2(listName);
